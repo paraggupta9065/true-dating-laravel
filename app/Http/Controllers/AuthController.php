@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Dotenv\Validator;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use HasApiTokens;
 class AuthController extends Controller
@@ -63,5 +65,37 @@ class AuthController extends Controller
             
             return response()->json($Response);
         }
+    }
+
+
+
+    public function forgotPassword(Request $request)
+    {
+        $email = $request->input('email');
+
+        // Check if email exists in the database
+        $user = DB::table('users')->where('email', $email)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'Email not found'], 404);
+        }
+
+        // Generate a unique token (you can customize the logic as needed)
+        $token = str_random(60);
+
+        // Store the token in the password_resets table
+        DB::table('password_resets')->insert([
+            'email' => $email,
+            'token' => $token,
+            'created_at' => now()
+        ]);
+
+        // Send email with the token (customize the email view and subject as needed)
+        Mail::send('emails.forgot_password', ['token' => $token], function ($message) use ($email) {
+            $message->to($email);
+            $message->subject('Reset Password');
+        });
+
+        return response()->json(['message' => 'Reset password link sent to your email'], 200);
     }
 }
