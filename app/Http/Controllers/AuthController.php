@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use HasApiTokens;
 class AuthController extends Controller
 {
+
+    // Controller for Auth System
     public function register(Request $Request){
         $validator  = Validator($Request->all(),[
             'UserName' => 'required',
@@ -73,24 +75,24 @@ class AuthController extends Controller
     {
         $email = $request->input('email');
 
-        // Check if email exists in the database
+        
         $user = DB::table('users')->where('email', $email)->first();
 
         if (!$user) {
             return response()->json(['message' => 'Email not found'], 404);
         }
 
-        // Generate a unique token (you can customize the logic as needed)
+
         $token = str_random(60);
 
-        // Store the token in the password_resets table
+        
         DB::table('password_resets')->insert([
             'email' => $email,
             'token' => $token,
             'created_at' => now()
         ]);
 
-        // Send email with the token (customize the email view and subject as needed)
+        // Send email with the token
         Mail::send('emails.forgot_password', ['token' => $token], function ($message) use ($email) {
             $message->to($email);
             $message->subject('Reset Password');

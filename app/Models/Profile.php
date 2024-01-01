@@ -16,5 +16,5 @@ class Profile extends Model
         'status', 
         'professional_background'
     ];
-
+ 
 }
