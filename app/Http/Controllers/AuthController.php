@@ -80,17 +80,17 @@ class AuthController extends Controller
             return response()->json(['message' => 'Email not found'], 404);
         }
 
-        // Generate a unique token (you can customize the logic as needed)
+        // Generate a unique token 
         $token = str_random(60);
 
-        // Store the token in the password_resets table
+        
         DB::table('password_resets')->insert([
             'email' => $email,
             'token' => $token,
             'created_at' => now()
         ]);
 
-        // Send email with the token (customize the email view and subject as needed)
+       
         Mail::send('emails.forgot_password', ['token' => $token], function ($message) use ($email) {
             $message->to($email);
             $message->subject('Reset Password');
