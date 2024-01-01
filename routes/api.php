@@ -38,6 +38,6 @@ Route::put('/update-profile/{id}', [ProfileController::class, 'update']);
 
 
 // fetch the user profile
-Route::get('profiles{id}', [FetchUserProfile::class, 'fetchUseProfile']);
+Route::get('profiles/{id}', [FetchUserProfile::class, 'fetchUseProfile']);
 
 
