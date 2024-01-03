@@ -8,6 +8,7 @@ use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
+    // fetch the user profile
     public function FetchProfile($id)
     {
         $profile = User::find($id);

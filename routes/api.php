@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+// fetch the user profile
 Route::get('fetch-profile{id}', [UserController::class, 'FetchProfile']);
+
+// create/store and update user profile 
+Route::post('/store-profile', [UserProfileController::class, 'store']);
+Route::put('/update-profile/{id}', [UserProfileController::class, 'update']);
+
+
 
