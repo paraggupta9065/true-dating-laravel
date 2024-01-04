@@ -18,7 +18,7 @@ class UserProfileController extends Controller
             'Email' => 'required|string',
             'Mobile' => 'required|string',
             'Password' => 'required|string',
-            'reset_token' => 'string',
+            'reset_token' => 'string', 
             'fcm_token' => 'string',
             'video_intro' => 'string',
             'gender' => 'string',
