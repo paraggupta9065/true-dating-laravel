@@ -37,7 +37,10 @@ class User extends Authenticatable
         'ug_degree',
         'graduate_degree',
         'in_grade_school',
-        'push_notification_enabled'
+        'push_notification_enabled',
+        // updated column
+        'latitude',
+        'longitude'
     ];
 
 }

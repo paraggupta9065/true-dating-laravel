@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserProfileController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\fetchNearbyUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,5 @@ Route::get('fetch-profile{id}', [UserController::class, 'FetchProfile']);
 Route::post('/store-profile', [UserProfileController::class, 'store']);
 Route::put('/update-profile/{id}', [UserProfileController::class, 'update']);
 
-
-
+// fetch the near by user 
+Route::get('/fetch-nearby-users', [fetchNearbyUser::class, 'fetchNearbyUsers']);
