@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class UserProfileController extends Controller
 {
-    // store user profile data and update 
+    // store and update user profile data 
 
 
     public function store(Request $request)
