@@ -14,7 +14,7 @@ return new class extends Migration
             $table->id();
             $table->string('Name'); 
             $table->string('Email')->unique();
-            $table->string('Mobile');
+            $table->string('Mobile')->unique();
             $table->string('Password');
             $table->string('reset_token')->nullable();
             $table->string('fcm_token')->nullable();

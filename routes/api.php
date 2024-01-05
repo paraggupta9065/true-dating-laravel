@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\fetchNearbyUser;
-
+use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,3 +30,8 @@ Route::put('/update-profile/{id}', [UserProfileController::class, 'update']);
 
 // fetch the near by user 
 Route::get('/fetch-nearby-users', [fetchNearbyUser::class, 'fetchNearbyUsers']);
+
+
+// Auth Api 
+Route::post('/signup', [AuthController::class, 'signUp']);
+Route::post('/signin', [AuthController::class, 'signIn']);
