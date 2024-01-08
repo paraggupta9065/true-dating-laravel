@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,11 +12,12 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    
     protected $fillable = [
-        'Name',
-        'Email',
-        'Mobile',
-        'Password',
+        'name',
+        'email',
+        'mobile',
+        'password',
         'reset_token',
         'fcm_token',
         'video_intro',
@@ -28,7 +30,7 @@ class User extends Authenticatable
         'current_location',
         'home_location',
         'body_type',
-        'excercise',
+        'exercise',
         'kids',
         'religion',
         'high_school',
@@ -38,8 +40,10 @@ class User extends Authenticatable
         'graduate_degree',
         'in_grade_school',
         'push_notification_enabled',
-        // updated column
         'latitude',
         'longitude'
     ];
+
+   
+
 }

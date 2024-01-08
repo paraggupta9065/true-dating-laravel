@@ -6,16 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-   
-
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('user', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('Name'); 
-            $table->string('Email')->unique();
-            $table->string('Mobile')->unique();
-            $table->string('Password');
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->string('mobile')->unique();
+            $table->string('password');
             $table->string('reset_token')->nullable();
             $table->string('fcm_token')->nullable();
             $table->string('video_intro')->nullable();
@@ -28,7 +29,7 @@ return new class extends Migration
             $table->string('current_location')->nullable();
             $table->string('home_location')->nullable();
             $table->string('body_type')->nullable();
-            $table->string('excercise')->nullable();
+            $table->string('exercise')->nullable();
             $table->boolean('kids')->nullable();
             $table->string('religion')->nullable();
             $table->boolean('high_school')->nullable();
@@ -37,14 +38,18 @@ return new class extends Migration
             $table->boolean('ug_degree')->nullable();
             $table->boolean('graduate_degree')->nullable();
             $table->boolean('in_grade_school')->nullable();
-            $table->boolean('push_notification_enabled')->nullable();
+            $table->boolean('push_notification_enabled')->default(false);
+            $table->double('latitude', 10, 6)->nullable();
+            $table->double('longitude', 10, 6)->nullable();
             $table->timestamps();
         });
     }
 
-
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('user');
+        Schema::dropIfExists('users');
     }
 };

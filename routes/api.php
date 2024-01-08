@@ -1,11 +1,15 @@
 <?php
 
+use App\Http\Controllers\ChatChannelController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\UserProfileController;
-use App\Http\Controllers\fetchNearbyUser;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FetchProfile;
+use App\Http\Controllers\NearByUser;
+use App\Http\Controllers\ProfileLikeController;
+use App\Http\Controllers\StoreUpdateProfile;
+use App\Http\Controllers\VideoController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,17 +25,28 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// fetch the user profile
-Route::get('fetch-profile{id}', [UserController::class, 'FetchProfile']);
+// Auth API's
+Route::post('/sign-up', [UserController::class, 'signUp']);
+Route::post('/sign-in', [UserController::class, 'signIn']);
+Route::put('/update-password/{name}', [UserController::class, 'updatePassword']);
 
-// create/store and update user profile 
-Route::post('/store-profile', [UserProfileController::class, 'store']);
-Route::put('/update-profile/{id}', [UserProfileController::class, 'update']);
+// Fetch Profile by ID API
+Route::get('/fetch-profile{id}', [FetchProfile::class, 'fetchProfile']);
 
-// fetch the near by user 
-Route::get('/fetch-nearby-users', [fetchNearbyUser::class, 'fetchNearbyUsers']);
+// Update or Store the profile data 
+Route::put('/create-user-profile{id}', [StoreUpdateProfile::class, 'StoreUserProfile']);
+Route::put('/update-profile{id}', [StoreUpdateProfile::class, 'UpdateUserProfile']);
 
+// Fetch Near-by-users 
+Route::get('/users/nearby', [NearByUser::class, 'NearbyUsers']);
 
-// Auth Api 
-Route::post('/signup', [AuthController::class, 'signUp']);
-Route::post('/signin', [AuthController::class, 'signIn']);
+// Upload & Delete the vidio 
+Route::post('/upload-video', [VideoController::class, 'uploadVideo']);
+Route::delete('/delete-video/{userId}', [VideoController::class, 'deleteVideo']);
+
+// User like
+Route::post('/like-user/{userId}', [ProfileLikeController::class, 'likeUser']);
+
+// Fetch chat channel
+Route::get('/fetch-chat-channels',[ChatChannelController::class,'fetchChatChannels']);
+
