@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\ChatChannelController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\checkChatChannel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FetchProfile;
 use App\Http\Controllers\NearByUser;
 use App\Http\Controllers\ProfileLikeController;
+use App\Http\Controllers\sendMessage;
 use App\Http\Controllers\StoreUpdateProfile;
 use App\Http\Controllers\VideoController;
 
@@ -49,4 +52,29 @@ Route::post('/like-user/{userId}', [ProfileLikeController::class, 'likeUser']);
 
 // Fetch chat channel
 Route::get('/fetch-chat-channels',[ChatChannelController::class,'fetchChatChannels']);
+
+// Fetch unread messagr count
+/*
+    Chech the Auth User
+Route::middleware('auth:api')->get('/fetch-unread-message-count', [ChatController::class, 'fetchUnreadMessageCount']);
+*/
+Route::get('/fetch-unread-message-count', [ChatController::class, 'fetchUnreadMessageCount']);
+
+
+// Fetch chat message 
+Route::get('/fetch-chat-messages/{channelId}', [ChatController::class, 'fetchChatMessages']);
+
+// Check-chat-channel
+Route::get('/check-chat-channel/{userId}', [checkChatChannel::class, 'checkChatChannel']);
+
+// Send the message
+Route::post('/send-message/{channelId}', [sendMessage::class, 'sendMessage']);
+
+
+// ==========================================================================================
+
+
+// Admin API Started  From Here 
+
+// crete the plan 
 

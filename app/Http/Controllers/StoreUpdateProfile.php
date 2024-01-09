@@ -62,7 +62,7 @@ class StoreUpdateProfile extends Controller
 
     public function UpdateUserProfile(Request $request, $id)
     {
-        // Validate the request data dynamically
+       
         $validatedData = $request->validate([
             '*.field' => 'required|string',
             '*.value' => 'required|string',
@@ -77,7 +77,7 @@ class StoreUpdateProfile extends Controller
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        // Dynamically update user profile fields based on the request data
+        
         try {
             foreach ($validatedData as $data) {
                 $field = $data['field'];

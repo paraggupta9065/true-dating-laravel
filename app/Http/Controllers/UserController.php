@@ -65,7 +65,7 @@ class UserController extends Controller
             return response()->json(['message' => 'Current password is incorrect'], 400);
         }
 
-       
+        // Update the user's password with the new password
         $user->password = Hash::make($request->new_password);
         $user->save();
 
