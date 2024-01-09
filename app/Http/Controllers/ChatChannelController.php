@@ -12,7 +12,7 @@ class ChatChannelController extends Controller
 {
     public function fetchChatChannels()
     {
-        $userId = Auth::id(); // Retrieve authenticated user ID
+        $userId = Auth::id();
 
         // Fetch chat channels where the authenticated user is involved (user1_id or user2_id)
         $chatChannels = ChatChannel::where('user1_id', $userId)
