@@ -42,7 +42,6 @@ class UserController extends Controller
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
-        // Generate token or other logic for sign-in
         return response()->json(['message' => 'User authenticated'], 200);
     }
 
@@ -53,7 +52,6 @@ class UserController extends Controller
             'new_password' => 'required|string|min:6',
         ]);
 
-        // Find the user by name
         $user = User::where('name', $name)->first();
 
         if (!$user) {

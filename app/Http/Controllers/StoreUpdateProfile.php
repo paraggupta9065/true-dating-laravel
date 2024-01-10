@@ -12,7 +12,6 @@ class StoreUpdateProfile extends Controller
     {
         Log::info('Received request data:', $request->all());
 
-        // Validate the request data
         $validatedData = $request->validate([
             'gender' => 'nullable|string',
             'looking_for' => 'nullable|string',
@@ -36,16 +35,13 @@ class StoreUpdateProfile extends Controller
             'longitude' => 'nullable|string',
         ]);
 
-        // Find the user by ID
         $user = User::find($id);
 
-        // Check if the user exists
         if (!$user) {
             Log::error('User not found with ID: ' . $id);
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        // Attempt to update the user profile
         try {
             $user->update($validatedData);
             Log::info('User profile updated successfully for user ID: ' . $id);
@@ -68,10 +64,8 @@ class StoreUpdateProfile extends Controller
             '*.value' => 'required|string',
         ]);
 
-        // Find the user by ID
         $user = User::find($id);
 
-        // Check if the user exists
         if (!$user) {
             Log::error('User not found with ID: ' . $id);
             return response()->json(['message' => 'User not found'], 404);
@@ -83,7 +77,6 @@ class StoreUpdateProfile extends Controller
                 $field = $data['field'];
                 $value = $data['value'];
                 
-                // Check if the field exists in the users table
                 if (array_key_exists($field, $user->getAttributes())) {
                     $user->$field = $value;
                 } else {
@@ -91,7 +84,6 @@ class StoreUpdateProfile extends Controller
                 }
             }
             
-            // Save the updated user profile
             $user->save();
 
             Log::info('User profile updated successfully for user ID: ' . $id);

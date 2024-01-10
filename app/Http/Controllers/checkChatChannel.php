@@ -12,7 +12,7 @@ class checkChatChannel extends Controller
     public function checkChatChannel($userId)
 {
     try {
-        // Retrieve authenticated user ID
+       
         $authUserId = Auth::id();
 
         // Check if a chat channel exists 
@@ -32,7 +32,7 @@ class checkChatChannel extends Controller
         }
 
     } catch (\Exception $e) {
-        // Log and handle exceptions
+        
         Log::error('Error checking chat channel:', ['error' => $e->getMessage(), 'trace' => $e->getTrace()]);
 
         return response()->json(['error' => 'Failed to check chat channel.'], 500);

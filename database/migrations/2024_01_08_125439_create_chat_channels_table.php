@@ -16,7 +16,6 @@ return new class extends Migration
             $table->timestamp('last_message_date')->nullable();
             $table->timestamps();
 
-            // Define foreign key constraints if needed
             $table->foreign('user1_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('user2_id')->references('id')->on('users')->onDelete('cascade');
         });

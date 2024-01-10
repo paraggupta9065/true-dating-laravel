@@ -3,11 +3,13 @@
 use App\Http\Controllers\ChatChannelController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\checkChatChannel;
+use App\Http\Controllers\CreateSubscriptionController;
 use App\Http\Controllers\FetchLikeUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FetchProfile;
+use App\Http\Controllers\FetchUsers;
 use App\Http\Controllers\NearByUser;
 use App\Http\Controllers\ProfileLikeController;
 use App\Http\Controllers\sendMessage;
@@ -56,12 +58,7 @@ Route::post('/like-user/{userId}', [ProfileLikeController::class, 'likeUser']);
 Route::get('/fetch-chat-channels',[ChatChannelController::class,'fetchChatChannels']);
 
 // Fetch unread messagr count
-/*
-    Chech the Auth User
-Route::middleware('auth:api')->get('/fetch-unread-message-count', [ChatController::class, 'fetchUnreadMessageCount']);
-*/
 Route::get('/fetch-unread-message-count', [ChatController::class, 'fetchUnreadMessageCount']);
-
 
 // Fetch chat message 
 Route::get('/fetch-chat-messages/{channelId}', [ChatController::class, 'fetchChatMessages']);
@@ -76,7 +73,11 @@ Route::post('/send-message/{channelId}', [sendMessage::class, 'sendMessage']);
 Route::get('/fetch-users-who-i-liked', [FetchLikeUsers::class, 'fetchUsersWhoILiked']);
 Route::get('/fetch-users-who-liked-me', [FetchLikeUsers::class, 'fetchUsersWhoLikedMe']);
 
+// Purchase Subscription
+Route::post('/purchase-subscription', [CreateSubscriptionController::class, 'purchaseSubscription']);
 
+// Fetch current subscription plans
+Route::get('/fetch-current-subscription-plans', [CreateSubscriptionController::class, 'fetchCurrentSubscriptionPlans']);
 
 
 // ==========================================================================================
@@ -89,3 +90,7 @@ Route::post('/create-subscription', [SubscriptionController::class, 'createSubsc
 Route::get('/fetch-subscription/{id}', [SubscriptionController::class, 'fetchSubscription']);
 Route::put('/update-subscription/{id}', [SubscriptionController::class, 'updateSubscription']);
 Route::delete('/delete-subscription/{id}', [SubscriptionController::class, 'deleteSubscription']);
+
+Route::get('/fetch-subscribed-users', [FetchUsers::class, 'fetchSubscribedUsers']);
+Route::get('/fetch-unsubscribed-users', [FetchUsers::class, 'fetchUnsubscribedUsers']);
+Route::get('/fetch-all-users', [FetchUsers::class, 'fetchAllUsers']);

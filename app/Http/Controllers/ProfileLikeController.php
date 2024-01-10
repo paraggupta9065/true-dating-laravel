@@ -11,13 +11,9 @@ class ProfileLikeController extends Controller
     {
         $user = Auth::user();
 
-        // Validate user retrieval
         if (!$user) {
             return response()->json(['message' => 'User not authenticated'], 401);
         }
-
-        // Validate if the liked user exists (You may need to modify this based on your logic)
-        // For example, you might check if the user with ID $userId exists in the database.
 
         // Create a new like record
         $like = new ProfileLike();
