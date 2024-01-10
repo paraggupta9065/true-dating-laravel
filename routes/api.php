@@ -11,6 +11,7 @@ use App\Http\Controllers\NearByUser;
 use App\Http\Controllers\ProfileLikeController;
 use App\Http\Controllers\sendMessage;
 use App\Http\Controllers\StoreUpdateProfile;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\VideoController;
 
 /*
@@ -77,4 +78,7 @@ Route::post('/send-message/{channelId}', [sendMessage::class, 'sendMessage']);
 // Admin API Started  From Here 
 
 // crete the plan 
-
+Route::post('/create-subscription', [SubscriptionController::class, 'createSubscription']);
+Route::get('/fetch-subscription/{id}', [SubscriptionController::class, 'fetchSubscription']);
+Route::put('/update-subscription/{id}', [SubscriptionController::class, 'updateSubscription']);
+Route::delete('/delete-subscription/{id}', [SubscriptionController::class, 'deleteSubscription']);
