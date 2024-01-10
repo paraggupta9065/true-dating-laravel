@@ -29,4 +29,16 @@ class ProfileLike extends Model
     {
         return $this->belongsTo(User::class, 'liked_to');
     }
+
+
+    // for the fetch like user 
+    public function likedUser()
+    {
+        return $this->belongsTo(User::class, 'liked_by', 'id');
+    }
+
+    public function likingUser()
+    {
+        return $this->belongsTo(User::class, 'liked_to', 'id');
+    }
 }

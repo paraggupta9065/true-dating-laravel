@@ -3,6 +3,7 @@
 use App\Http\Controllers\ChatChannelController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\checkChatChannel;
+use App\Http\Controllers\FetchLikeUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -70,6 +71,12 @@ Route::get('/check-chat-channel/{userId}', [checkChatChannel::class, 'checkChatC
 
 // Send the message
 Route::post('/send-message/{channelId}', [sendMessage::class, 'sendMessage']);
+
+// Fetch users: who-i-liked,who-liked-me
+Route::get('/fetch-users-who-i-liked', [FetchLikeUsers::class, 'fetchUsersWhoILiked']);
+Route::get('/fetch-users-who-liked-me', [FetchLikeUsers::class, 'fetchUsersWhoLikedMe']);
+
+
 
 
 // ==========================================================================================
