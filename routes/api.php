@@ -36,6 +36,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/sign-up', [UserController::class, 'signUp']);
 Route::post('/sign-in', [UserController::class, 'signIn']);
 Route::put('/update-password/{name}', [UserController::class, 'updatePassword']);
+Route::post('/forgot-password', [UserController::class, 'forgotPassword']);
+
 
 // Fetch Profile by ID API
 Route::get('/fetch-profile{id}', [FetchProfile::class, 'fetchProfile']);
