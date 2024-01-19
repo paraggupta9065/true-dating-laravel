@@ -13,6 +13,7 @@ use App\Http\Controllers\FetchUsers;
 use App\Http\Controllers\NearByUser;
 use App\Http\Controllers\ProfileLikeController;
 use App\Http\Controllers\sendMessage;
+use App\Http\Controllers\SocialLogin;
 use App\Http\Controllers\StoreUpdateProfile;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\VideoController;
@@ -96,3 +97,16 @@ Route::delete('/delete-subscription/{id}', [SubscriptionController::class, 'dele
 Route::get('/fetch-subscribed-users', [FetchUsers::class, 'fetchSubscribedUsers']);
 Route::get('/fetch-unsubscribed-users', [FetchUsers::class, 'fetchUnsubscribedUsers']);
 Route::get('/fetch-all-users', [FetchUsers::class, 'fetchAllUsers']);
+
+
+
+
+// Social Login Api 
+
+// login with mobile number
+Route::post('/login/mobile-number', [SocialLogin::class, 'mobileLogin']);
+// login with email
+Route::post('/login/email', [SocialLogin::class, 'emailLogin']);
+// login with google 
+Route::get('/login/google', [SocialLogin::class, 'googleLogin'])->name('google.login');
+// Route::get('/dashboard', [SocialLogin::class, 'handleGoogleCallback']);

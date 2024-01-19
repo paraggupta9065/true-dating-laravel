@@ -44,6 +44,8 @@ class User extends Authenticatable
         'longitude'
     ];
 
-   
-
+    public function findForPassport($username)
+    {
+        return $this->where('mobile', $username)->first();
+    }
 }
