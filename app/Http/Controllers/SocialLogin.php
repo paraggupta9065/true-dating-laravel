@@ -42,39 +42,34 @@ class SocialLogin extends Controller
     }
  
 
-   
-    public function googleLogin()
+    public function redirectToGoogle()
     {
-        $user = Socialite::driver('google')->user();
-
-        $socialLogin = SocialLogin::where('provider', 'google')
-            ->where('provider_id', $user->id)
-            ->first();
-
-        if ($socialLogin) {
-            $existingUser = $socialLogin->user;
-            Auth::login($existingUser);
-
-            $token = $existingUser->createToken('google-login')->plainTextToken;
-
-            return response()->json(['token' => $token, 'message' => 'Login successful']);
-        } else {
-           
-            $newUser = User::create([
-                'email' => $user->email,
-            ]);
-
-            $newSocialLogin = $newUser->socialLogins()->create([
-                'provider' => 'google',
-                'provider_id' => $user->id,
-            ]);
-
-            Auth::login($newUser);
-
-            $token = $newUser->createToken('google-login')->plainTextToken;
-
-            return response()->json(['token' => $token, 'message' => 'Login successful']);
-        }
+        return Socialite::driver('google')->stateless()->redirect();
     }
 
+    public function handleGoogleCallback()
+    {
+        try {
+            $googleUser = Socialite::driver('google')->stateless()->user();
+
+            $user = User::where('email', $googleUser->getEmail())->first();
+
+            if (!$user) {
+                // If the user doesn't exist, you may create a new user account
+                $user = User::create([
+                    'name' => $googleUser->getName(),
+                    'email' => $googleUser->getEmail(),
+                    'password' => bcrypt(str_random(16)),
+                ]);
+            }
+
+            Auth::login($user);
+
+            $token = $user->createToken('GoogleToken')->accessToken;
+
+            return response()->json(['token' => $token]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Something went wrong!'], 500);
+        }
+    }
 }

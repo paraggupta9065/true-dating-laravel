@@ -108,5 +108,10 @@ Route::post('/login/mobile-number', [SocialLogin::class, 'mobileLogin']);
 // login with email
 Route::post('/login/email', [SocialLogin::class, 'emailLogin']);
 // login with google 
-Route::get('/login/google', [SocialLogin::class, 'googleLogin'])->name('google.login');
-// Route::get('/dashboard', [SocialLogin::class, 'handleGoogleCallback']);
+
+// Route::get('/login/google', [SocialLogin::class, 'redirect'])->name('google.login');
+// Route::get('/login/google/callback',[SocialLogin::class, 'callBackGoogle'])->name('google.callback');
+
+
+Route::get('login/google', [SocialLogin::class, 'redirectToGoogle']);
+Route::get('login/google/callback', [SocialLogin::class, 'handleGoogleCallback']);

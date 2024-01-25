@@ -10,10 +10,12 @@ return new class extends Migration
     {
         Schema::create('sociallogins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->string('provider'); 
-            $table->string('provider_id'); 
-            $table->timestamps();
+            $table->string('name'); 
+            $table->string('email')->unique(); 
+            $table->timestamp('email_verified_at')->nullable(); 
+            $table->string('password')->nullable(); 
+            $table->string('google_id')->nullable(); 
+            $table->rememberToken();             
         });
     }
     public function down(): void
@@ -21,3 +23,4 @@ return new class extends Migration
         Schema::dropIfExists('sociallogins');
     }
 };
+     
