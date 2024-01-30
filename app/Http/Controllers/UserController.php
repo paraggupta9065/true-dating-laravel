@@ -8,30 +8,47 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
+     
     public function signUp(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:users|max:255',
-            'mobile' => 'required|string|unique:users|max:15',
-            'password' => 'required|string|min:6',
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:6',
         ]);
 
-        $user = new User([
+        // Create a new user
+        $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'mobile' => $request->mobile,
             'password' => Hash::make($request->password),
         ]);
 
-        $user->save();
-
-        return response()->json(['message' => 'User registered successfully'], 201);
+        return response()->json(['message' => 'User registered successfully', 'user' => $user], 201);
     }
+
+    public function signupWithMobile(Request $request)
+    {
+        $request->validate([
+            'mobile' => 'required|numeric|unique:users',
+        ]);
+
+        $user = User::create([
+            'mobile' => $request->input('mobile'),
+        ]);
+
+        return response()->json(['message' => 'Signup successful', 'user' => $user], 201);
+    }
+
+
+
+
+
+
 
     public function signIn(Request $request)
     {

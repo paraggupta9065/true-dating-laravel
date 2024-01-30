@@ -36,6 +36,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Auth API's
 Route::post('/sign-up', [UserController::class, 'signUp']);
 Route::post('/sign-in', [UserController::class, 'signIn']);
+Route::post('/sign-up-mobile',[UserController::class,'signupWithMobile']);
+
 Route::put('/update-password/{name}', [UserController::class, 'updatePassword']);
 Route::post('/forgot-password', [UserController::class, 'forgotPassword']);
 
