@@ -43,11 +43,11 @@ Route::post('/forgot-password', [UserController::class, 'forgotPassword']);
 
 
 // Fetch Profile by ID API
-Route::get('/fetch-profile{id}', [FetchProfile::class, 'fetchProfile']);
+Route::get('/fetch-profile/{id}', [FetchProfile::class, 'fetchProfile']);
 
 // Update or Store the profile data 
-Route::put('/create-user-profile{id}', [StoreUpdateProfile::class, 'StoreUserProfile']);
-Route::put('/update-profile{id}', [StoreUpdateProfile::class, 'UpdateUserProfile']);
+Route::put('/create-user-profile/{id}', [StoreUpdateProfile::class, 'StoreUserProfile']);
+Route::put('/update-profile/{id}', [StoreUpdateProfile::class, 'UpdateUserProfile']);
 
 // Fetch Near-by-users 
 Route::get('/users/nearby', [NearByUser::class, 'NearbyUsers']);
