@@ -33,6 +33,10 @@ class StoreUpdateProfile extends Controller
             'in_grade_school' => 'nullable|boolean',
             'latitude' => 'nullable|string',
             'longitude' => 'nullable|string',
+            'height' => 'nullable|string',
+            'age' => 'nullable|string',
+            'relationship_goal' => 'nullable|string',
+            'ethinicity' => 'nullable|string',
         ]);
 
         $user = User::find($id);

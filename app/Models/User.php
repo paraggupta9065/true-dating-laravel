@@ -41,7 +41,11 @@ class User extends Authenticatable
         'in_grade_school',
         'push_notification_enabled',
         'latitude',
-        'longitude'
+        'longitude',
+        'ethinicity',
+        'age',
+        'height',
+        'relationship_goal'
     ];
 
     public function findForPassport($username)
